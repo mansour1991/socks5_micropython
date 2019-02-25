@@ -16,6 +16,9 @@ class Connection:
             while not self.lte.isattached():
                 counter1 += 1
                 print(str(counter1) + ' seconds elapsed')
+                if counter1 >= 50 :
+                    import machine
+                    machine.reset()
                 time.sleep(1)
 
         if not self.lte.isconnected():
