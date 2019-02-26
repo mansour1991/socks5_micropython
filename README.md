@@ -1,3 +1,3 @@
-This client library is inspired for the Socksipy module: 
+This client library is inspired from the Socksipy module: 
     https://github.com/Anorov/PySocks
 
