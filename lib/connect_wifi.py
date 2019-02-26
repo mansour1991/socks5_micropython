@@ -1,18 +1,20 @@
 import network 
+import time
 
 class Connection:
     def __init__(self):
-        self.wifi_client = network.WLAN(network.STA_IF)
+        self.wlan_client = network.WLAN(mode=network.WLAN.STA)
 
     def wifi_connect(self, access_point, password):
-        if not self.wifi_client.isconnected():
-            print('enabling WLAN interface as Wifi Station (client)')
-            self.wifi_client.active(True)
-               
-        while not self.wifi_client.isconnected():
-            try:
-                self.wifi_client.connect(access_point, password)
-            except Exception:
-                print('Got an exception !!!')
-            
-            print("Obtained IP address...\n", self.wifi_client.ifconfig())
+        counter = 0
+        print('Attatching to WLAN network')
+        if not self.wlan_client.isconnected():
+            self.wlan_client.connect(ssid=access_point, auth=(network.WLAN.WPA2, password))
+        while not self.wlan_client.isconnected():
+            if counter >= 10:
+                import machine 
+                machine.reset()
+            time.sleep(1)
+            counter = counter + 1
+            print(str(counter) + ' seconds elapsed')
+        print('Connected, IP address:', self.wlan_client.ifconfig())
