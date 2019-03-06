@@ -1,3 +1,4 @@
+"""Copy rights 2019, Mahmoud Mansour"""
 import network 
 import time
 
